@@ -60,9 +60,45 @@ class Sorcery(Card):
     def __str__(self):
         return self.name
 
+class Instant(Card):
+    def __init__(self, name, subtypes, mc):
+        super(Instant, self).__init__()
+        self.name = name
+        self.mc = {x: mc.get(x, 0) + self.mc.get(x, 0) for x in set(mc).union(self.mc)}
+        self.subtypes = subtypes
+
+    def play(self, owner, game, verbose=False):
+        super(Instant, self).play(owner, game)
+        if verbose:
+            print("    casting %s" % (self.name))
+        owner.casting_spell = self.name
+
+    def __repr__(self):
+        return self.name
+
+    def __str__(self):
+        return self.name
+
+class Enchantment(Card):
+    def __init__(self, name, subtypes, mc):
+        super(Enchantment, self).__init__()
+        self.name = name
+        self.mc = {x: mc.get(x, 0) + self.mc.get(x, 0) for x in set(mc).union(self.mc)}
+        self.subtypes = subtypes
+
+class Artifact(Card):
+    def __init__(self, name, subtypes, mc):
+        super(Artifact, self).__init__()
+        self.name = name
+        self.mc = {x: mc.get(x, 0) + self.mc.get(x, 0) for x in set(mc).union(self.mc)}
+        self.subtypes = subtypes
+
+
+
+
 
 class Creature(Card):
-    def __init__(self, name, subtypes, mc, power, toughness, cannot_block=False):
+    def __init__(self, name, subtypes, mc, keywords = [], power = 0, toughness = 0, cannot_block=False):
         super(Creature, self).__init__()
         self.name = name
         self.mc = {x: mc.get(x, 0) + self.mc.get(x, 0) for x in set(mc).union(self.mc)}
@@ -82,6 +118,8 @@ class Creature(Card):
         self.damage_assignment = []
         # Consider adding a functional creature card instantiation argument that sets text automatically
         self.cannot_block = cannot_block
+        self.keywords = keywords
+
 
     def play(self, owner, game, verbose=False):
         super(Creature, self).play(owner, game)
