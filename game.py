@@ -188,7 +188,7 @@ class Game:
                 creatures.append(self.battlefield[i])
         return creatures
 
-    # NOTE: this function might have become too crowded, consider refactoring
+    # TODO this function might have become too crowded, consider refactoring
     def get_legal_moves(self, player):
         if self.is_over():
             return []

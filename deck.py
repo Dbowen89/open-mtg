@@ -12,6 +12,9 @@ def get_bear_wars_deck():
         decklist.append(cards.Land("Forest", "Basic Land", "Forest", [lambda self: self.owner.add_mana({"Green": 1})]))
         decklist.append(cards.Land("Taiga", "Land", "Mountain Forest", [lambda self: self.owner.add_mana({"Green": 1}),
                                                                         lambda self: self.owner.add_mana({"Red": 1})]))
+    
+    if len(decklist) != 60:
+        raise Exception("Deck has wrong number of cards")    
     return decklist
 
 

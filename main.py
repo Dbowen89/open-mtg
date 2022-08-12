@@ -54,7 +54,7 @@ def start_games(amount_of_games):
         else:
             logging.info("Silver player starts game")
         while not current_game.is_over():
-            if current_game.player_with_priority.index is 1:
+            if current_game.player_with_priority.index == 1:
                 move = current_game.player_with_priority.determine_move(method="random", game=current_game)
             else:
                 # move = game.player_with_priority.determine_move(method="random", game=game)
